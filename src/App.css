@@ -1,0 +1,156 @@
+/* Global box-sizing */
+* {
+  box-sizing: border-box;
+}
+
+/* Root document scroll settings */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; /* prevent horizontal scroll */
+  overflow-y: auto; /* vertical scroll only if needed */
+  font-family: "Poppins", sans-serif;
+  background-color: #000;
+  color: #fff;
+}
+
+/* Main app container (non-scrolling, relative) */
+.app-container {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  overflow: visible; /* allow content to grow */
+}
+
+/* Aurora animated background */
+.aurora-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(59, 130, 246, 0.2),
+    rgba(16, 185, 129, 0.2),
+    rgba(251, 191, 36, 0.1)
+  );
+  background-size: 200% 200%;
+  animation: aurora 20s infinite;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+@keyframes aurora {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Content always on top of background */
+.content-container {
+  position: relative;
+  z-index: 10;
+  padding-top: 160px; /* Adjust based on Navbar height */
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Example reusable page container */
+.page {
+  margin: 2rem auto 0;
+  padding: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Page titles */
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+/* Counter styles */
+.counter-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.counter {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #FBBF24;
+}
+
+.increment-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+  background-color: #10B981;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.increment-button:hover {
+  background-color: #059669;
+}
+
+/* Distortion or canvas wrapper */
+.distortion-container {
+  width: 100%;
+  height: 400px;
+  margin-top: 1rem;
+  border-radius: 12px;
+  border: 1px solid #3B82F6;
+  overflow: hidden;
+}
+
+/* File input styling */
+.image-upload {
+  margin: 1rem 0;
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #FBBF24;
+  border-radius: 8px;
+}
+
+/* Floating animation */
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 3s linear infinite;
+  will-change: transform;
+}
