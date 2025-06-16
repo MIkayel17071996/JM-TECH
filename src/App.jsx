@@ -27,6 +27,7 @@ import PerformanceAudit from './pages/PerformanceAudit.jsx'
 import SecurityAudit from './pages/SecurityAudit.jsx'
 import ComplianceAudit from './pages/ComplianceAudit.jsx'
 import Footer from './components/Footer.jsx';
+import PrivacyPolicy from './pages/PrivacyPolicy.jsx'
 import './App.css';
 
 function App() {
@@ -83,6 +84,7 @@ function App() {
           <Route path="/portfolio" element={<div className="page">Portfolio Page</div>} />
           <Route path="/about" element={<About />} /> {/* Correct About route */}
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="*" element={<div className="page text-center py-16">404 - Page Not Found</div>} />
         </Routes>
         <Footer />
