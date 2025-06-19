@@ -62,9 +62,7 @@ const ProductDevelopmentSection = () => {
           <p className="text-gray-300 text-lg mb-10 max-w-prose">
             We take care of your projects with proven agile methods that are designed to get all stakeholders (even non-technical ones) in alignment. Our workflow amplifies collaboration and faster turnarounds to achieve even the most ambitious goals.
           </p>
-          <a href="#" className="text-blue-500 text-lg font-semibold hover:underline">
-            SEE HOW WE WORK →
-          </a>
+
         </motion.div>
       </div>
     </motion.section>

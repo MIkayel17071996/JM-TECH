@@ -25,18 +25,9 @@ const MobileAppDevelopment = () => {
           <div className="aurora-container fixed inset-0 z-[-1] bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-yellow-900/20 animate-gradient-pulse"></div>
           <div className="content-container relative z-10">
 
-            <HeroSection
-              title="Crafting Exceptional Mobile Experiences with JM TECH"
-              subtitle="At JM TECH, we transform your innovative ideas into powerful, intuitive, and high-performing mobile applications. Specializing in bespoke solutions for iOS, Android, and cross-platform ecosystems, we are your trusted partner in navigating the dynamic mobile landscape. Let's build something extraordinary together."
-              ctaText="Request a Free Consultation"
-              ctaLink="/contact"
-              titleColor="#FBBF24"
-              className="min-h-[500px] flex items-center justify-center bg-transparent bg-cover bg-center overflow-x-hidden"
-            />
-
             <section
               id="why-jmtech"
-              className="px-6 py-20 bg-transparent"
+              className="px- bg-transparent"
               aria-label="Reasons to partner with JM TECH for mobile development"
             >
               <div className="max-w-7xl mx-auto text-center">
@@ -68,7 +59,6 @@ const MobileAppDevelopment = () => {
               <div className="max-w-7xl mx-auto text-center">
                 <SectionHeader
                   title="Our Comprehensive Mobile Development Services"
-                  subtitle="From concept to deployment and beyond, JM TECH offers a full spectrum of mobile development services to bring your vision to life. Each service is tailored to deliver exceptional results and a competitive edge."
                 />
                 <div
                   className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8"

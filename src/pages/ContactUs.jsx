@@ -44,7 +44,7 @@ function ContactUs() {
       <div className="page py-20 px-4 font-sans antialiased bg-gradient-to-br from-gray-900 to-black text-white min-h-screen flex items-center justify-center relative overflow-hidden">
         <div className="max-w-3xl mx-auto w-full relative z-10">
           <h2 className="text-5xl md:text-6xl font-extrabold text-white mb-6 text-center tracking-tight leading-tight">
-            Reach Out
+            Reach Out !
           </h2>
           <p className="text-lg md:text-xl text-gray-300 mb-12 text-center leading-relaxed max-w-2xl mx-auto">
             Have a question, feedback, or partnership opportunity? Our team is ready to connect.
@@ -131,7 +131,7 @@ function ContactUs() {
               <p className="text-gray-100 mb-8 text-base leading-relaxed font-medium">{successMessage}</p>
               <button
                 onClick={() => setShowSuccessModal(false)}
-                className="px-8 py-3 bg-gradient-to-r from-green-600 to-lime-500 text-white font-semibold rounded-lg hover:from-green-700 hover:to-lime-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-transparent transition-all duration-300 cursor-pointer shadow-md hover:shadow-lg"
+                className="px-8 py-3 bg-gradient-to-r from-green-400 to-lime-500 text-white font-semibold rounded-lg hover:from-green-700 hover:to-lime-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-transparent transition-all duration-300 cursor-pointer shadow-md hover:shadow-lg"
               >
                 Close
               </button>

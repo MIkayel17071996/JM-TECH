@@ -30,13 +30,7 @@ export const mobileServices = [
     description:
       'Blend web and native with efficient hybrid apps using Ionic and Cordova. Our solutions offer rapid deployment, broad compatibility, and access to device features, perfect for content-driven apps and extending web presence to mobile.'
   },
-  {
-    id: 'pwa-development',
-    icon: '💻',
-    title: 'Progressive Web Apps (PWA)',
-    description:
-      'Deliver app-like experiences via the web with PWAs. Our fast, reliable, and engaging solutions offer offline access, push notifications, and quick load times, combining web discoverability with native functionality for enhanced user engagement.'
-  },
+
   {
     id: 'mobile-app-testing',
     icon: '🧪',

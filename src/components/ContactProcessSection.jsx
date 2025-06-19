@@ -58,7 +58,7 @@ const ContactProcessSection = () => {
         {/* Content Left */}
         <motion.div variants={itemVariants}>
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
-            Ready to Talk About Your Product Project?
+            Ready to Talk About Your Project?
           </h1>
           <div className="space-y-6">
             {steps.map((step, idx) => (
@@ -69,7 +69,7 @@ const ContactProcessSection = () => {
                   <p className="text-gray-300 text-base">{step.text}</p>
                   {idx === 0 && (
                     <a
-                      href="#"
+                      href="/contact"
                       className="inline-block mt-4 px-6 py-2 text-lg font-semibold text-white bg-blue-500 backdrop-blur-lg border border-green-300 rounded-2xl hover:bg-green-400 hover:border-green-200 hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-opacity-75"
                     >
                       CONTACT US

@@ -40,21 +40,10 @@ const WebDevelopment = () => {
             aria-hidden="true"
           ></div>
           <div className="content-container relative z-10">
-            {/* Hero Section */}
-            <HeroSection
-              title="Dynamic Web Development Solutions by JM TECH"
-              subtitle="At JM TECH, we craft high-performing, scalable, and user-centric web applications that elevate your digital presence. From responsive front-ends to robust back-ends, our tailored solutions drive business growth and deliver exceptional user experiences."
-              ctaText="Request a Free Consultation"
-              ctaLink="/contact"
-              titleColor="#FBBF24"
-              className="min-h-[500px] flex items-center justify-center bg-transparent bg-cover bg-center overflow-x-hidden"
-              aria-label="Web Development Hero Section"
-            />
-
             {/* Why Choose JM TECH Section */}
             <section
               id="why-jmtech-web"
-              className="px-6 py-20 bg-transparent"
+              className="px-6  bg-transparent"
               aria-labelledby="why-jmtech-heading"
             >
               <div className="max-w-7xl mx-auto text-center">
@@ -87,7 +76,6 @@ const WebDevelopment = () => {
                 <SectionHeader
                   id="services-heading"
                   title="Our Comprehensive Web Development Services"
-                  subtitle="From ideation to launch and beyond, JM TECH provides end-to-end web development services designed to deliver powerful, scalable, and user-friendly solutions."
                 />
                 <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
                   {webServices.map((service) => (

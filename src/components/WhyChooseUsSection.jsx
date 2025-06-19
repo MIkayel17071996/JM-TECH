@@ -11,12 +11,13 @@ const features = [
     text: `From full product delivery to specific modules, we adapt to your needs. Whether you're starting from scratch or modernizing a legacy system, we deliver scalable solutions that grow with your business.`,
   },
   {
-    title: 'Technology Without Limits',
+    title: 'No Limits',
     text: `We don’t just develop — we advise. Our full-stack team helps you choose the right technologies to ensure your product is fast, secure, and ready for future growth.`,
   },
   {
     title: 'Built-In Quality',
-    text: `Quality is our foundation. With rigorous QA, proactive risk control, and agile delivery, we ensure every project is robust, scalable, and built to perform.`,
+    text: `Quality is our foundation. With
+    proactive risk control and agile delivery, we ensure every project is robust, scalable, and built to perform.`,
   },
 ];
 
@@ -70,10 +71,6 @@ const WhyChooseUsSection = () => {
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
             Why Partner with Us?
           </h1>
-          <p className="text-gray-300 text-lg mb-10 max-w-prose">
-            Unlike other development companies, you’ll get to know our experts face-to-face. We go the distance to understand your business and integrate with your teams and workflows.
-          </p>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {features.map(({ title, text }, idx) => (
               <motion.div

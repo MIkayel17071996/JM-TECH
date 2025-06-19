@@ -33,9 +33,9 @@ export const webServices = [
   {
     id: 'cms-e-commerce',
     icon: '🛒',
-    title: 'CMS & E-commerce Development',
+    title: 'E-commerce Development',
     description:
-      'Empower your online presence with user-friendly CMS and e-commerce platforms. We build custom solutions using WordPress, Shopify, Magento, or bespoke systems, giving you full control over content management and sales with seamless functionality.',
+      'Empower your online presence with user-friendly e-commerce platforms. We build custom solutions using WordPress, Shopify, Magento, or bespoke systems, giving you full control over content management and sales with seamless functionality.',
   },
   {
     id: 'api-integration',
@@ -47,7 +47,7 @@ export const webServices = [
   {
     id: 'web-security',
     icon: '🔒',
-    title: 'Web Security & Performance Optimization',
+    title: 'Web & Performance Optimization',
     description:
       'Safeguard your web assets with advanced security measures and optimize for blazing-fast performance. We conduct vulnerability assessments, implement robust protections, and enhance speed to ensure a secure, reliable, and smooth user experience.',
   },
@@ -77,7 +77,7 @@ export const webTechStack = [
     technologies: ['AWS', 'Azure', 'Google Cloud', 'Docker', 'Kubernetes', 'CI/CD'],
   },
   {
-    category: 'CMS & E-commerce',
+    category: 'E-commerce',
     technologies: ['WordPress', 'Shopify', 'Magento', 'WooCommerce'],
   },
   {

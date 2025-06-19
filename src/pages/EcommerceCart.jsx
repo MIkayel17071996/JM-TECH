@@ -32,25 +32,15 @@ const EcommerceCart = () => {
           ></div>
 
           <div className="content-container relative z-10">
-            <HeroSection
-              title="E-Commerce Cart Development by JM TECH"
-              subtitle="From robust shopping cart functionalities to secure payment integrations, we deliver comprehensive e-commerce solutions tailored to your business needs. Explore our expertise in crafting user-friendly, scalable, and secure platforms."
-              ctaText="Get Started"
-              ctaLink="/contact"
-              titleColor="#FBBF24"
-              className="min-h-[500px] flex items-center justify-center bg-transparent bg-cover bg-center overflow-x-hidden"
-            />
-
             <section
               id="why-jmtech-ecommerce"
-              className="px-6 py-20 bg-transparent"
+              className="px-6  bg-transparent"
               aria-labelledby="why-partner-heading"
             >
               <div className="max-w-7xl mx-auto text-center">
                 <SectionHeader
                   id="why-partner-heading"
                   title="Why Partner with JM TECH for E-Commerce?"
-                  subtitle="In the competitive e-commerce landscape, a powerful platform is key to success. JM TECH delivers innovative, secure, and customer-focused solutions to drive sales and growth."
                 />
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
                   {whyChooseItems.map((item, i) => (
@@ -124,7 +114,6 @@ const EcommerceCart = () => {
                 <SectionHeader
                   id="tech-stack-heading"
                   title="Our Core E-Commerce Technology Stack"
-                  subtitle="We harness a versatile technology stack to build scalable, secure, and high-performance e-commerce platforms."
                 />
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
                   {ecommerceTechStack.map((tech, i) => (

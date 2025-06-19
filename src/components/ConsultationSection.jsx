@@ -56,13 +56,10 @@ const ConsultationSection = () => {
               Launch Your Product with a Clear Plan
             </h1>
             <p className="text-lg sm:text-xl text-gray-300 mb-8">
-              Unsure how to begin your product development? Our experts will guide you through design, tech, and team decisions, delivering a precise roadmap and resource plan for success.
-            </p>
-            <p className="text-md sm:text-lg text-[#FBBF1F] italic mb-12">
-              From first steps to final success — we pave the way for your vision.
+              <span className="text-lg sm:text-xl text-yellow-400 mb-8">Unsure how to begin your product development?</span> Our experts will guide you through design, tech, and team decisions, delivering a precise roadmap and resource plan for success.
             </p>
             <motion.a
-              href="/consultation"
+              href="/contact"
               className="inline-block px-8 py-4 text-lg font-semibold text-white bg-blue-500 backdrop-blur-lg border border-green-300 rounded-2xl hover:bg-green-400 hover:border-green-200 hover:shadow-2xl transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-opacity-75"
 
             >

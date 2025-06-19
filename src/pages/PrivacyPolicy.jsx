@@ -1,27 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { ChevronDownIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
 
 function PrivacyPolicy() {
   const [activeSection, setActiveSection] = useState('summary');
   const [expandedDetails, setExpandedDetails] = useState({});
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const navbarRef = useRef(null);
 
-  // Function to toggle individual detail sections
+  // Toggle individual detail sections
   const toggleDetail = (id) => {
     setExpandedDetails((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
-  // Smooth scroll and set active section when a nav link is clicked
+  // Smooth scroll to section
   const handleNavLinkClick = (e, sectionId) => {
     e.preventDefault();
     const targetElement = document.getElementById(sectionId);
     if (targetElement) {
       targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
       setTimeout(() => setActiveSection(sectionId), 300);
+      setIsMobileNavOpen(false);
+    } else {
+      setErrorMessage(`Section "${sectionId}" not found. Please try another link.`);
+      setTimeout(() => setErrorMessage(''), 3000);
     }
   };
 
-  // Observe sections to update activeSection in navigation as user scrolls
+  // Observe sections to update activeSection
   useEffect(() => {
+    const navbarHeight = navbarRef.current ? navbarRef.current.offsetHeight : 160;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -30,7 +40,7 @@ function PrivacyPolicy() {
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.3, rootMargin: `-${navbarHeight}px 0px 0px 0px` }
     );
 
     const sections = document.querySelectorAll(
@@ -39,6 +49,15 @@ function PrivacyPolicy() {
     sections.forEach((section) => observer.observe(section));
 
     return () => sections.forEach((section) => observer.unobserve(section));
+  }, []);
+
+  // Show/hide back-to-top button
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 500);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navItems = [
@@ -50,22 +69,59 @@ function PrivacyPolicy() {
   ];
 
   return (
-    <div className="page py-16 px-4 font-sans antialiased bg-gradient-to-br from-gray-900 to-black text-white min-h-screen flex flex-col items-center relative overflow-hidden">
+    <div className="page py-16 px-4 font-sans antialiased bg-gradient-to-br from-gray-900 to-black text-white min-h-screen flex flex-col items-center relative overflow-hidden pt-40">
+      {/* Mobile Navigation */}
+      <div className="lg:hidden fixed top-40 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-md">
+        <button
+          ref={navbarRef}
+          className="p-4 text-[#FBBF24]"
+          onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
+          aria-label="Toggle section navigation"
+        >
+          {isMobileNavOpen ? <XMarkIcon className="h-8 w-8" /> : <Bars3Icon className="h-8 w-8" />}
+        </button>
+        {isMobileNavOpen && (
+          <ul className="space-y-2 p-4 bg-gray-900/95 rounded-lg shadow-lg">
+            {navItems.map((item) => (
+              <li key={item.id}>
+                <a
+                  href={`#${item.id}`}
+                  onClick={(e) => handleNavLinkClick(e, item.id)}
+                  className={`block px-4 py-3 text-lg font-medium text-[#FBBF24] hover:bg-[#FBBF24]/20 hover:text-white transition-colors duration-300 rounded-md ${
+                    activeSection === item.id ? 'bg-[#FBBF24] text-black font-bold' : ''
+                  }`}
+                >
+                  {item.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      {/* Error Toast */}
+      {errorMessage && (
+        <div className="fixed top-48 right-4 bg-red-500 text-white p-4 rounded-lg shadow-lg z-50">
+          {errorMessage}
+        </div>
+      )}
+
       {/* Container for main content and sticky nav */}
       <div className="flex w-full max-w-7xl mx-auto relative z-10">
         {/* Sticky Side Navigation */}
-        <nav className="hidden lg:block w-64 flex-shrink-0 sticky top-16 h-fit pt-8 pr-8 border-r border-gray-700/60">
+        <nav className="hidden lg:block w-64 flex-shrink-0 sticky top-40 h-fit pt-8 pr-8 border-r border-gray-700/60">
           <ul className="space-y-3">
             {navItems.map((item) => (
               <li key={item.id}>
                 <a
                   href={`#${item.id}`}
                   onClick={(e) => handleNavLinkClick(e, item.id)}
-                  className={`block px-4 py-2 rounded-lg text-lg font-medium transition-colors duration-200
-                    ${activeSection === item.id
-                      ? 'bg-gradient-to-r from-yellow-500 to-amber-400 text-white font-bold shadow-md'
-                      : 'text-gray-400 hover:text-yellow-300 hover:bg-gray-800/50'
-                    }`}
+                  className={`block px-4 py-2 rounded-lg text-lg font-medium transition-colors duration-300 ${
+                    activeSection === item.id
+                      ? 'bg-[#FBBF24] text-black font-bold shadow-md'
+                      : 'text-[#FBBF24] hover:text-white hover:bg-[#FBBF24]/20 focus:text-white focus:bg-[#FBBF24]/20'
+                  }`}
+                  aria-current={activeSection === item.id ? 'page' : undefined}
                 >
                   {item.title}
                 </a>
@@ -77,27 +133,26 @@ function PrivacyPolicy() {
         {/* Main Content Area */}
         <div className="flex-grow pl-0 lg:pl-8">
           <header className="text-center mb-12">
-            <h1 className="text-5xl md:text-6xl font-extrabold text-yellow-400 mb-4 tracking-tight leading-tight">
+            <h1 className="text-5xl md:text-6xl font-extrabold text-[#FBBF24] mb-4 tracking-tight leading-tight">
               Your Privacy at JM TECH
             </h1>
             <p className="text-md text-gray-400 mb-6 max-w-3xl mx-auto">
               <em>
-                <strong>Last Updated:</strong> <span className="text-yellow-400">June 16, 2025</span>
+                <strong>Last Updated:</strong> <span className="text-[#FBBF24]">June 16, 2025</span>
               </em>
             </p>
             <p className="text-lg text-white leading-relaxed max-w-4xl mx-auto">
-              At <span className="text-yellow-300 font-bold">JM TECH</span>, we are committed to maintaining transparent and responsible data handling practices. This Privacy Policy outlines how we collect, use, and safeguard your personal information to ensure your trust and confidence.
+              At <span className="text-[#FBBF24] font-bold">JM TECH</span>, we are committed to maintaining transparent and responsible data handling practices. This Privacy Policy outlines how we collect, use, and safeguard your personal information to ensure your trust and confidence.
             </p>
           </header>
 
           {/* Quick Summary */}
-          <section id="summary" className="p-8 bg-gray-900/60 rounded-xl shadow-inner border border-gray-800/70 mb-12 transform hover:scale-[1.005] transition-transform duration-300">
-            <h2 className="text-3xl font-bold text-yellow-400 mb-6 text-center">
+          <section id="summary" className="p-8 bg-gray-900/60 rounded-xl shadow-inner border border-gray-800/70 mb-12 transform hover:scale-[1.005] transition-transform duration-300 pt-10 scroll-mt-40">
+            <h2 className="text-3xl font-bold text-[#FBBF24] mb-6 text-center">
               Privacy Policy: Quick Summary
             </h2>
             <div className="prose prose-invert max-w-none text-white leading-relaxed">
-              <p className="font-semibold text-lg mb-4 text-yellow-300">Key Information at a Glance:</p>
-              <ul className="list-disc list-inside ml-4 space-y-2 text-white">
+              <ul className="list-disc list-inside ml-4 space-y-2 text-white pt-5">
                 <li>
                   <strong>What We Collect:</strong> Information you provide (e.g., name and email when contacting us) and data collected automatically (e.g., IP address and browser type) to enhance our website.
                 </li>
@@ -108,7 +163,7 @@ function PrivacyPolicy() {
                   <strong>How We Use It:</strong> Your information supports responses to inquiries, service improvements, security measures, and, with your consent, marketing communications.
                 </li>
                 <li>
-                  <strong>Sharing Your Data:</strong> <strong className="text-yellow-300">We do not sell your personal information.</strong> It is shared only with trusted service providers or when legally mandated.
+                  <strong>Sharing Your Data:</strong> <strong className="text-[#FBBF24]">We do not sell your personal information.</strong> It is shared only with trusted service providers or when legally mandated.
                 </li>
                 <li>
                   <strong>Security:</strong> We employ encryption (HTTPS) and other safeguards to protect your data, though no system is entirely secure.
@@ -123,8 +178,8 @@ function PrivacyPolicy() {
           {/* Main Content Sections */}
           <div className="space-y-12">
             {/* 1. Data Collection */}
-            <section id="data-collection" className="p-8 bg-gray-900/50 rounded-xl shadow-2xl border border-gray-800/70">
-              <h2 className="text-4xl font-bold text-yellow-400 mb-6 border-b border-gray-700 pb-3">
+            <section id="data-collection" className="p-8 bg-gray-900/50 rounded-xl shadow-2xl border border-gray-800/70 pt-15 scroll-mt-40">
+              <h2 className="text-4xl font-bold text-[#FBBF24] mb-6 border-b border-gray-700 pb-3">
                 1. Information We Collect
               </h2>
               <p className="mb-6 text-gray-300">
@@ -132,9 +187,15 @@ function PrivacyPolicy() {
               </p>
               <button
                 onClick={() => toggleDetail('data-collection-details')}
-                className="text-yellow-400 hover:text-yellow-300 flex items-center gap-2 text-lg font-semibold transition-colors duration-200 mb-6"
+                className="text-[#FBBF24] hover:text-white flex items-center gap-2 text-lg font-semibold transition-colors duration-300 mb-6"
+                aria-expanded={expandedDetails['data-collection-details']}
               >
-                {expandedDetails['data-collection-details'] ? 'Read Less ▲' : 'Read More Details ▼'}
+                <span>{expandedDetails['data-collection-details'] ? 'Read Less' : 'Read More Details'}</span>
+                <ChevronDownIcon
+                  className={`w-5 h-5 transition-transform duration-300 ${
+                    expandedDetails['data-collection-details'] ? 'rotate-180' : ''
+                  }`}
+                />
               </button>
               <div
                 className={`overflow-hidden transition-all duration-500 ease-in-out ${
@@ -142,13 +203,13 @@ function PrivacyPolicy() {
                 }`}
               >
                 <div className="prose prose-invert max-w-none text-white leading-relaxed pt-2">
-                  <h3 className="text-2xl font-semibold text-yellow-300 mb-4">1.1. Information You Provide</h3>
+                  <h3 className="text-2xl font-semibold text-[#FBBF24] mb-4">1.1. Information You Provide</h3>
                   <p className="mb-4 text-white">
                     This includes information you voluntarily submit when engaging with us:
                   </p>
                   <ul className="list-disc list-inside ml-4 mb-6 text-white">
                     <li>
-                      <strong>Contact Details:</strong> Name, email address, phone number, and message content submitted via contact forms, emails (e.g., to <a href="mailto:contact@jmtech.com">contact@jmtech.com</a>), or live chat.
+                      <strong>Contact Details:</strong> Name, email address, phone number, and message content submitted via contact forms, emails (e.g., to <a href="mailto:contact@jmtech.com" className="text-[#FBBF24] hover:text-white">contact@jmtech.com</a>), or live chat.
                     </li>
                     <li>
                       <strong>Subscriptions:</strong> Email address provided for newsletters or updates.
@@ -161,7 +222,7 @@ function PrivacyPolicy() {
                     This information enables effective communication and service delivery.
                   </p>
 
-                  <h3 className="text-2xl font-semibold text-yellow-300 mt-8 mb-4">1.2. Automatically Collected Information</h3>
+                  <h3 className="text-2xl font-semibold text-[#FBBF24] mt-8 mb-4">1.2. Automatically Collected Information</h3>
                   <p className="mb-4 text-white">
                     We automatically gather technical data to assess site performance and user interaction, including:
                   </p>
@@ -176,11 +237,8 @@ function PrivacyPolicy() {
                       <strong>Referral Sources:</strong> The originating website that directed you to us.
                     </li>
                   </ul>
-                  <p className="mb-4 text-white">
-                    Cookies, web beacons, and similar technologies facilitate this collection for analytics and user experience enhancement.
-                  </p>
 
-                  <h3 className="text-2xl font-semibold text-yellow-300 mt-8 mb-4">1.3. Cookies and Your Options</h3>
+                  <h3 className="text-2xl font-semibold text-[#FBBF24] mt-8 mb-4">1.3. Cookies and Your Options</h3>
                   <p className="mb-4 text-white">
                     We employ cookies—small data files stored on your device—to optimize functionality and analyze usage:
                   </p>
@@ -203,18 +261,21 @@ function PrivacyPolicy() {
             </section>
 
             {/* 2. Data Usage & Sharing */}
-            <section id="data-usage-sharing" className="p-8 bg-gray-900/50 rounded-xl shadow-2xl border border-gray-800/70">
-              <h2 className="text-4xl font-bold text-yellow-400 mb-6 border-b border-gray-700 pb-3">
+            <section id="data-usage-sharing" className="p-8 bg-gray-900/50 rounded-xl shadow-2xl border border-gray-800/70 pt-15 scroll-mt-40">
+              <h2 className="text-4xl font-bold text-[#FBBF24] mb-6 border-b border-gray-700 pb-3">
                 2. Use and Sharing of Your Information
               </h2>
-              <p className="mb-6 text-gray-300">
-                We utilize your information to support our operations and share it only under specific, limited conditions.
-              </p>
               <button
                 onClick={() => toggleDetail('data-usage-sharing-details')}
-                className="text-yellow-400 hover:text-yellow-300 flex items-center gap-2 text-lg font-semibold transition-colors duration-200 mb-6"
+                className="text-[#FBBF24] hover:text-white flex items-center gap-2 text-lg font-semibold transition-colors duration-300 mb-6"
+                aria-expanded={expandedDetails['data-usage-sharing-details']}
               >
-                {expandedDetails['data-usage-sharing-details'] ? 'Read Less ▲' : 'Read More Details ▼'}
+                <span>{expandedDetails['data-usage-sharing-details'] ? 'Read Less' : 'Read More Details'}</span>
+                <ChevronDownIcon
+                  className={`w-5 h-5 transition-transform duration-300 ${
+                    expandedDetails['data-usage-sharing-details'] ? 'rotate-180' : ''
+                  }`}
+                />
               </button>
               <div
                 className={`overflow-hidden transition-all duration-500 ease-in-out ${
@@ -222,7 +283,7 @@ function PrivacyPolicy() {
                 }`}
               >
                 <div className="prose prose-invert max-w-none text-white leading-relaxed pt-2">
-                  <h3 className="text-2xl font-semibold text-yellow-300 mb-4">2.1. How We Use Your Information</h3>
+                  <h3 className="text-2xl font-semibold text-[#FBBF24] mb-4">2.1. How We Use Your Information</h3>
                   <p className="mb-4 text-white">
                     Your information is used for the following purposes:
                   </p>
@@ -244,9 +305,9 @@ function PrivacyPolicy() {
                     </li>
                   </ul>
 
-                  <h3 className="text-2xl font-semibold text-yellow-300 mt-8 mb-4">2.2. Information Sharing</h3>
+                  <h3 className="text-2xl font-semibold text-[#FBBF24] mt-8 mb-4">2.2. Information Sharing</h3>
                   <p className="mb-4 text-white">
-                    <strong className="text-yellow-300">We do not sell, rent, or lease your personal information.</strong> Sharing occurs only in these instances:
+                    <strong className="text-[#FBBF24]">We do not sell, rent, or lease your personal information.</strong> Sharing occurs only in these instances:
                   </p>
                   <ul className="list-disc list-inside ml-4 mb-6 text-white">
                     <li>
@@ -263,7 +324,7 @@ function PrivacyPolicy() {
                     </li>
                   </ul>
 
-                  <h3 className="text-2xl font-semibold text-yellow-300 mt-8 mb-4">2.3. Data Retention</h3>
+                  <h3 className="text-2xl font-semibold text-[#FBBF24] mt-8 mb-4">2.3. Data Retention</h3>
                   <p className="mb-4 text-white">
                     We retain your information only as long as necessary to fulfill its intended purpose or comply with legal requirements. Subsequently, it is securely deleted or anonymized.
                   </p>
@@ -272,8 +333,8 @@ function PrivacyPolicy() {
             </section>
 
             {/* 3. Your Rights & Security */}
-            <section id="your-rights-security" className="p-8 bg-gray-900/50 rounded-xl shadow-2xl border border-gray-800/70">
-              <h2 className="text-4xl font-bold text-yellow-400 mb-6 border-b border-gray-700 pb-3">
+            <section id="your-rights-security" className="p-8 bg-gray-900/50 rounded-xl shadow-2xl border border-gray-800/70 pt-15 scroll-mt-40">
+              <h2 className="text-4xl font-bold text-[#FBBF24] mb-6 border-b border-gray-700 pb-3">
                 3. Your Rights and Security Measures
               </h2>
               <p className="mb-6 text-gray-300">
@@ -281,9 +342,15 @@ function PrivacyPolicy() {
               </p>
               <button
                 onClick={() => toggleDetail('your-rights-security-details')}
-                className="text-yellow-400 hover:text-yellow-300 flex items-center gap-2 text-lg font-semibold transition-colors duration-200 mb-6"
+                className="text-[#FBBF24] hover:text-white flex items-center gap-2 text-lg font-semibold transition-colors duration-300 mb-6"
+                aria-expanded={expandedDetails['your-rights-security-details']}
               >
-                {expandedDetails['your-rights-security-details'] ? 'Read Less ▲' : 'Read More Details ▼'}
+                <span>{expandedDetails['your-rights-security-details'] ? 'Read Less' : 'Read More Details'}</span>
+                <ChevronDownIcon
+                  className={`w-5 h-5 transition-transform duration-300 ${
+                    expandedDetails['your-rights-security-details'] ? 'rotate-180' : ''
+                  }`}
+                />
               </button>
               <div
                 className={`overflow-hidden transition-all duration-500 ease-in-out ${
@@ -291,7 +358,7 @@ function PrivacyPolicy() {
                 }`}
               >
                 <div className="prose prose-invert max-w-none text-white leading-relaxed pt-2">
-                  <h3 className="text-2xl font-semibold text-yellow-300 mb-4">3.1. Your Privacy Rights</h3>
+                  <h3 className="text-2xl font-semibold text-[#FBBF24] mb-4">3.1. Your Privacy Rights</h3>
                   <p className="mb-4 text-white">
                     Subject to applicable laws, you have the following rights:
                   </p>
@@ -308,7 +375,7 @@ function PrivacyPolicy() {
                     To exercise these rights, please contact us as outlined in the "Contact Us" section.
                   </p>
 
-                  <h3 className="text-2xl font-semibold text-yellow-300 mt-8 mb-4">3.2. Security Protections</h3>
+                  <h3 className="text-2xl font-semibold text-[#FBBF24] mt-8 mb-4">3.2. Security Protections</h3>
                   <p className="mb-4 text-white">
                     We implement robust measures to safeguard your information:
                   </p>
@@ -334,8 +401,8 @@ function PrivacyPolicy() {
             </section>
 
             {/* 4. General Information */}
-            <section id="general-info" className="p-8 bg-gray-900/50 rounded-xl shadow-2xl border border-gray-800/70">
-              <h2 className="text-4xl font-bold text-yellow-400 mb-6 border-b border-gray-700 pb-3">
+            <section id="general-info" className="p-8 bg-gray-900/50 rounded-xl shadow-2xl border border-gray-800/70 pt-15 scroll-mt-40">
+              <h2 className="text-4xl font-bold text-[#FBBF24] mb-6 border-b border-gray-700 pb-3">
                 4. General Information and Contact
               </h2>
               <p className="mb-6 text-gray-300">
@@ -343,9 +410,15 @@ function PrivacyPolicy() {
               </p>
               <button
                 onClick={() => toggleDetail('general-info-details')}
-                className="text-yellow-400 hover:text-yellow-300 flex items-center gap-2 text-lg font-semibold transition-colors duration-200 mb-6"
+                className="text-[#FBBF24] hover:text-white flex items-center gap-2 text-lg font-semibold transition-colors duration-300 mb-6"
+                aria-expanded={expandedDetails['general-info-details']}
               >
-                {expandedDetails['general-info-details'] ? 'Read Less ▲' : 'Read More Details ▼'}
+                <span>{expandedDetails['general-info-details'] ? 'Read Less' : 'Read More Details'}</span>
+                <ChevronDownIcon
+                  className={`w-5 h-5 transition-transform duration-300 ${
+                    expandedDetails['general-info-details'] ? 'rotate-180' : ''
+                  }`}
+                />
               </button>
               <div
                 className={`overflow-hidden transition-all duration-500 ease-in-out ${
@@ -353,35 +426,35 @@ function PrivacyPolicy() {
                 }`}
               >
                 <div className="prose prose-invert max-w-none text-white leading-relaxed pt-2">
-                  <h3 className="text-2xl font-semibold text-yellow-300 mb-4">4.1. Third-Party Websites</h3>
+                  <h3 className="text-2xl font-semibold text-[#FBBF24] mb-4">4.1. Third-Party Websites</h3>
                   <p className="mb-4 text-white">
                     Our website may link to external sites not operated by JM TECH. We are not responsible for their privacy practices or content. We recommend reviewing their policies.
                   </p>
 
-                  <h3 className="text-2xl font-semibold text-yellow-300 mt-8 mb-4">4.2. Children’s Privacy</h3>
+                  <h3 className="text-2xl font-semibold text-[#FBBF24] mt-8 mb-4">4.2. Children’s Privacy</h3>
                   <p className="mb-4 text-white">
                     Our services are not designed for individuals under 13. We do not knowingly collect their data. If such information is identified, please contact us for its prompt removal.
                   </p>
 
-                  <h3 className="text-2xl font-semibold text-yellow-300 mt-8 mb-4">4.3. Policy Updates</h3>
+                  <h3 className="text-2xl font-semibold text-[#FBBF24] mt-8 mb-4">4.3. Policy Updates</h3>
                   <p className="mb-4 text-white">
                     This Privacy Policy may be revised to reflect changes in practices or regulations. Updates will be posted here with a revised "Last Updated" date.
                   </p>
 
-                  <h3 id="contact-us" className="text-2xl font-semibold text-yellow-300 mt-8 mb-4">4.4. Contact Us</h3>
+                  <h3 id="contact-us" className="text-2xl font-semibold text-[#FBBF24] mt-8 mb-4">4.4. Contact Us</h3>
                   <p className="mb-4 text-white">
                     For questions, concerns, or to exercise your rights, please reach out to us:
                   </p>
                   <ul className="list-disc list-inside ml-4 mb-4 text-white">
                     <li>
                       <strong>Email:</strong>{' '}
-                      <a href="mailto:privacy@jmtech.com" className="text-yellow-400 hover:text-yellow-300 transition-colors duration-200 underline underline-offset-2">
+                      <a href="mailto:privacy@jmtech.com" className="text-[#FBBF24] hover:text-white transition-colors duration-300 underline underline-offset-2">
                         privacy@jmtech.com
                       </a>
                     </li>
                     <li>
                       <strong>Website:</strong>{' '}
-                      <Link to="/contact" className="text-yellow-400 hover:text-yellow-300 transition-colors duration-200 underline underline-offset-2">
+                      <Link to="/contact" className="text-[#FBBF24] hover:text-white transition-colors duration-300 underline underline-offset-2">
                         Contact Page
                       </Link>
                     </li>
@@ -392,6 +465,19 @@ function PrivacyPolicy() {
           </div>
         </div>
       </div>
+
+      {/* Back-to-Top Button */}
+      {showBackToTop && (
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="fixed bottom-4 right-4 bg-[#FBBF24] text-black p-3 rounded-full shadow-lg hover:bg-white transition-colors duration-300"
+          aria-label="Back to top"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+          </svg>
+        </button>
+      )}
     </div>
   );
 }

@@ -20,7 +20,7 @@ export const serviceCategories = [
     subServices: [
       {
         id: 'mobile',
-        title: 'Mobile App Development 📱',
+        title: 'Mobile Development 📱',
         description:
           'Build engaging and high-performance mobile applications for iOS and Android. We leverage native capabilities or cross-platform frameworks to ensure a seamless user experience and broad audience reach.',
       },
@@ -32,28 +32,28 @@ export const serviceCategories = [
       },
       {
         id: 'ecommerce-cart',
-        title: 'E-Commerce Cart 🛒',
+        title: 'E-Commerce   🛒',
         description:
           'Develop secure and user-friendly e-commerce platforms with robust shopping cart functionalities. We build solutions that enhance the customer journey from browsing to checkout, integrating payment gateways and inventory management.',
       },
-      {
-        id: 'cross-platform',
-        title: 'Cross-Platform Development 📲',
-        description:
-          'Maximize your reach across different operating systems with a single codebase. We utilize frameworks like React Native or Flutter to develop apps that perform flawlessly on both iOS and Android, saving time and resources.',
-      },
-      {
-        id: 'hybrid',
-        title: 'Hybrid App Development 🔄',
-        description:
-          'Combine the strengths of web technologies with native app features. Hybrid apps offer faster development cycles and broader compatibility while delivering a near-native user experience, ideal for rapid deployment.',
-      },
-      {
-        id: 'pwa',
-        title: 'Progressive Web Apps (PWA) 🖥️',
-        description:
-          'Provide an app-like experience directly through a web browser. PWAs are reliable, fast, and engaging, offering offline access, push notifications, and quick loading times without requiring installation from app stores.',
-      },
+      // {
+      //   id: 'cross-platform',
+      //   title: 'Cross-Platform Development 📲',
+      //   description:
+      //     'Maximize your reach across different operating systems with a single codebase. We utilize frameworks like React Native or Flutter to develop apps that perform flawlessly on both iOS and Android, saving time and resources.',
+      // },
+      // {
+      //   id: 'hybrid',
+      //   title: 'Hybrid App Development 🔄',
+      //   description:
+      //     'Combine the strengths of web technologies with native app features. Hybrid apps offer faster development cycles and broader compatibility while delivering a near-native user experience, ideal for rapid deployment.',
+      // },
+      // {
+      //   id: 'pwa',
+      //   title: 'Progressive Web Apps (PWA) 🖥️',
+      //   description:
+      //     'Provide an app-like experience directly through a web browser. PWAs are reliable, fast, and engaging, offering offline access, push notifications, and quick loading times without requiring installation from app stores.',
+      // },
     ],
   },
   {
@@ -84,34 +84,35 @@ export const serviceCategories = [
   },
   {
     id: 'software-testing-qa',
-    title: 'Software Testing and Quality Assurance',
+    title: 'Quality Assurance',
     description:
       'Ensure the reliability, performance, and security of your software with our comprehensive testing services. We meticulously verify every aspect to deliver a flawless and high-quality user experience.',
     subServices: [
-      {
-        id: 'automation-testing',
-        title: 'Automation Testing 🤖',
-        description:
-          'Accelerate your testing cycles and improve accuracy by automating repetitive test cases. Our experts design and implement robust automation frameworks to streamline your QA process and reduce manual effort.',
-      },
       {
         id: 'manual-testing',
         title: 'Manual Testing 🖱️',
         description:
           'Discover subtle bugs, usability issues, and user experience flaws that automated tests might miss. Our skilled QA engineers conduct thorough manual tests to ensure every detail is perfect and meets user expectations.',
       },
-      {
-        id: 'security-testing',
-        title: 'Security Testing 🔒',
-        description:
-          'Protect your applications from cyber threats and vulnerabilities. We perform comprehensive security audits, penetration testing, and vulnerability assessments to safeguard your data and systems against attacks.',
-      },
+
       {
         id: 'mobile-app-testing',
         title: 'Mobile App Testing 📲',
         description:
           'Guarantee seamless performance and user experience across various mobile devices and operating systems. We conduct rigorous testing for functionality, compatibility, and performance on iOS and Android platforms.',
       },
+      {
+        id: 'automation-testing',
+        title: 'Automation Testing 🤖',
+        description:
+          'Accelerate your testing cycles and improve accuracy by automating repetitive test cases. Our experts design and implement robust automation frameworks to streamline your QA process and reduce manual effort.',
+      },
+      // {
+      //   id: 'security-testing',
+      //   title: 'Security Testing 🔒',
+      //   description:
+      //     'Protect your applications from cyber threats and vulnerabilities. We perform comprehensive security audits, penetration testing, and vulnerability assessments to safeguard your data and systems against attacks.',
+      // },
     ],
   },
   {
@@ -137,12 +138,6 @@ export const serviceCategories = [
         title: 'Security Audit 🔐',
         description:
           'Conduct in-depth security assessments to uncover vulnerabilities, ensure data protection, and recommend measures to strengthen your application’s security posture.',
-      },
-      {
-        id: 'compliance-audit',
-        title: 'Compliance Audit ✅',
-        description:
-          'Verify adherence to industry regulations and standards (e.g., GDPR, HIPAA) to ensure your software meets necessary legal and operational requirements.',
       },
     ],
   },

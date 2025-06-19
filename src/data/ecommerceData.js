@@ -12,14 +12,14 @@ export const ecommerceServices = [
   {
     id: 'ecommerce-cart',
     icon: '🛒',
-    title: 'E-Commerce Cart Development',
+    title: 'E-Commerce Development',
     description:
       'Build secure and user-friendly e-commerce platforms with robust shopping cart features. We enhance the customer journey from browsing to checkout, integrating payment gateways and inventory management for a seamless experience.',
   },
   {
     id: 'payment-gateway',
     icon: '💳',
-    title: 'Payment Gateway Integration',
+    title: 'Payment  Integration',
     description:
       'Seamlessly integrate secure payment gateways like Stripe, PayPal, and Square, ensuring a smooth, trustworthy checkout process that builds customer confidence.',
   },
@@ -47,7 +47,7 @@ export const ecommerceServices = [
   {
     id: 'mobile-commerce',
     icon: '📱',
-    title: 'Mobile Commerce Optimization',
+    title: 'Mobile  Optimization',
     description:
       'Create mobile-first e-commerce experiences with responsive design, fast-loading pages, and mobile payment integrations like Apple Pay and Google Pay to capture the growing mobile shopping audience.',
   },

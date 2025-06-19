@@ -57,11 +57,9 @@ const Intro = () => {
               transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
               viewport={{ once: true }}
             >
-              From frontend to backend, from MVP to full-scale systems — we build with
-              clarity, performance, and future growth in mind.
             </motion.p>
             <motion.a
-              href="/contact-us"
+              href="/contact"
               className="inline-block px-8 py-4 text-lg font-semibold text-white bg-blue-500 backdrop-blur-lg border border-green-300 rounded-2xl hover:bg-green-400 hover:border-green-200 hover:shadow-2xl transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-opacity-75"
 
             >

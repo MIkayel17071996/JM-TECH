@@ -63,6 +63,7 @@ function App() {
       <div className="content-container">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services/web" element={<WebDevelopment />} />
           <Route path="/services/mobile" element={<MobileAppDevelopment />} />
