@@ -10,5 +10,7 @@ export default defineConfig({
     tailwindcss(),
   ],
   server: { port: 5173 },
-  base: '/'
+
+  base : process.env.VITE_BASE_PATH || '/JM-TECH'
+
 })
