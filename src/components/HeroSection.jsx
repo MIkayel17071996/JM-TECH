@@ -1,4 +1,3 @@
-// src/components/HeroSection.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 
@@ -27,7 +26,13 @@ const HeroSection = ({
 
   return (
     <motion.div
-      className="relative top-[-150px] min-h-[calc(100vh-10rem)] flex items-center justify-center bg-transparent overflow-x-hidden"
+      // CORRECTED: Added responsive top padding.
+      // - `pt-16` adds 4rem (64px) of padding to the top on mobile. This pushes
+      //   your content down to make space for a navbar.
+      // - `sm:pt-0` removes that padding on screens larger than the 'sm' breakpoint,
+      //   restoring the original perfect vertical centering for desktop.
+      // - You can change `pt-16` to `pt-20` or `pt-5` (for 20px) as needed.
+      className="relative flex items-center justify-center bg-transparent overflow-x-hidden min-h-screen pt-16 sm:pt-0"
       style={{
         backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
         backgroundSize: 'cover',
@@ -42,7 +47,7 @@ const HeroSection = ({
         variants={containerVariants}
       >
         <motion.h1
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 sm:mb-6 flex justify-center flex-wrap text-center"
+          className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 sm:mb-6 flex justify-center flex-wrap text-center"
           style={{ color: titleColor }}
         >
           {lines.map((line, i) => (
@@ -51,7 +56,7 @@ const HeroSection = ({
                 <motion.span
                   key={`${i}-${j}`}
                   variants={wordVariants}
-                  className="inline-block whitespace-nowrap mr-2"
+                  className="inline-block whitespace-nowrap mr-1.5 sm:mr-2 md:mr-3"
                 >
                   {word}
                 </motion.span>
@@ -61,7 +66,7 @@ const HeroSection = ({
         </motion.h1>
 
         <motion.p
-          className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 sm:mb-8 md:mb-10 max-w-full sm:max-w-md md:max-w-2xl lg:max-w-3xl mx-auto"
+          className="text-lg md:text-xl lg:text-2xl text-gray-200 mb-8 md:mb-10 max-w-full sm:max-w-md md:max-w-2xl lg:max-w-3xl mx-auto"
           variants={containerVariants}
         >
           {subtitle}
@@ -70,7 +75,7 @@ const HeroSection = ({
         {ctaText && ctaLink && (
           <motion.a
             href={ctaLink}
-            className="inline-block bg-[#FBBF24] text-white font-semibold px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-full text-sm sm:text-base md:text-lg hover:bg-[#EAB308] transition-colors duration-300"
+            className="inline-block bg-[#FBBF24] text-white font-semibold px-8 md:px-10 py-3 sm:py-4 rounded-full text-base md:text-lg hover:bg-[#EAB308] transition-colors duration-300"
             whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(251, 191, 36, 0.5)' }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.3 }}
