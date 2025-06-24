@@ -11,20 +11,8 @@ function About() {
     setExpandedSections((prev) => ({ ...prev, [section]: !prev[section] }));
   };
 
-  // Smooth scroll with navbar offset
-  const handleNavLinkClick = (e, sectionId) => {
-    e.preventDefault();
-    const targetElement = document.getElementById(sectionId);
-    if (targetElement) {
-      const navbarHeight = 160; // Fixed height of navbar (h-40 = 160px)
-      const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-      window.scrollTo({
-        top: elementPosition - navbarHeight,
-        behavior: 'smooth',
-      });
-      setTimeout(() => setActiveSection(sectionId), 300);
-    }
-  };
+  // The handleNavLinkClick function has been removed as it's no longer necessary.
+  // Browser-native scrolling via CSS handles navigation, and the IntersectionObserver handles highlighting.
 
   // IntersectionObserver for sticky navigation
   useEffect(() => {
@@ -62,13 +50,13 @@ function About() {
 
         <div className="flex relative z-10">
           {/* Sticky Side Navigation */}
-          <nav className="hidden lg:block w-64 flex-shrink-0 sticky top-20 h-fit pt-8 pr-8 border-r border-gray-700/50">
+          <nav className="hidden lg:block w-64 flex-shrink-0 sticky top-40 h-fit pt-8 pr-8 border-r border-gray-700/50">
             <ul className="space-y-3">
               {navItems.map((item) => (
                 <li key={item.id}>
+                  {/* The onClick handler is removed to allow default browser anchor link behavior */}
                   <a
                     href={`#${item.id}`}
-                    onClick={(e) => handleNavLinkClick(e, item.id)}
                     className={`block px-4 py-2 rounded-lg text-lg font-medium transition-all duration-200 ${activeSection === item.id
                       ? 'bg-gradient-to-r from-yellow-500 to-amber-400 text-white font-bold shadow-md'
                       : 'text-yellow-400 hover:text-yellow-300 hover:bg-gray-800/50 focus:text-yellow-300 focus:bg-gray-800/50'
@@ -85,11 +73,11 @@ function About() {
           {/* Main Content Area */}
           <div className="flex-grow pl-0 lg:pl-10">
             {/* Introduction */}
-            <section id="intro" className="mb-16 text-center">
-              <h1 className="text-5xl md:text-6xl font-extrabold text-yellow-400 mb-6 tracking-tight leading-tight">
+            <section id="intro" className="mb-16 scroll-mt-40">
+              <h1 className="text-5xl md:text-6xl font-extrabold text-yellow-400 mb-6 tracking-tight leading-tight text-center">
                 About JM TECH
               </h1>
-              <p className="text-xl leading-relaxed text-gray-50 max-w-4xl mx-auto">
+              <p className="text-xl leading-relaxed text-gray-50 max-w-4xl mx-auto text-center">
                 JM TECH is a dynamic, newly established technology company dedicated to delivering <span className="text-yellow-300 font-semibold">innovative web and mobile application solutions</span>. Founded by a team of seasoned professionals with decades of collective experience, we combine deep technical expertise with a forward-thinking vision to empower businesses worldwide. Our focus on creating scalable, user-centric applications positions us as a trusted partner for startups, enterprises, and organizations seeking to transform their digital presence.
               </p>
               <button
@@ -103,7 +91,7 @@ function About() {
                 className={`overflow-hidden transition-all duration-500 ease-in-out ${expandedSections['intro-details'] ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
                   }`}
               >
-                <p className="mt-4 text-lg leading-relaxed text-gray-50 max-w-4xl mx-auto">
+                <p className="mt-4 text-lg leading-relaxed text-gray-50 max-w-4xl mx-auto text-center">
                   Our mission is to bridge the gap between complex technical challenges and intuitive, impactful solutions, with a particular emphasis on web and mobile platforms that drive business success.
                 </p>
               </div>
@@ -112,7 +100,7 @@ function About() {
             <div className="border-t border-gradient-to-r from-gray-700/50 to-transparent my-12"></div>
 
             {/* Why We Started */}
-            <section id="why-we-started" className="mb-16">
+            <section id="why-we-started" className="mb-16 scroll-mt-40">
               <h2 className="text-4xl font-bold text-yellow-400 mb-6 text-center">Why We Founded JM TECH</h2>
               <p className="text-lg leading-relaxed text-gray-50 max-w-3xl mx-auto text-center">
                 JM TECH was born from a collective desire to redefine software development by prioritizing <span className="text-yellow-300 font-semibold">innovation, precision, and client success</span>. Our founders, with extensive experience in global projects, identified a gap in the industry for a company that combines technical expertise with a client-centric approach, delivering tailored web and mobile solutions that drive measurable results.
@@ -139,7 +127,7 @@ function About() {
             <div className="border-t border-gradient-to-r from-gray-700/50 to-transparent my-12"></div>
 
             {/* Who We Are */}
-            <section id="who-we-are" className="mb-16">
+            <section id="who-we-are" className="mb-16 scroll-mt-40">
               <h2 className="text-4xl font-bold text-yellow-400 mb-6 text-center">Our Team</h2>
               <div className="grid md:grid-cols-2 gap-10 items-start">
                 <div>
@@ -179,7 +167,7 @@ function About() {
             <div className="border-t border-gradient-to-r from-gray-700/50 to-transparent my-12"></div>
 
             {/* What We Do */}
-            <section id="what-we-do" className="mb-16">
+            <section id="what-we-do" className="mb-16 scroll-mt-40">
               <h2 className="text-4xl font-bold text-yellow-400 mb-8 text-center">Our Services</h2>
               <p className="text-lg leading-relaxed text-gray-300 max-w-3xl mx-auto text-center mb-8">
                 JM TECH specializes in <span className="text-yellow-300 font-semibold">full-cycle web and mobile application development</span>, delivering end-to-end solutions tailored to the unique needs of startups, enterprises, and organizations. From concept to deployment, we provide comprehensive services to ensure seamless, scalable, and impactful applications.
@@ -235,7 +223,7 @@ function About() {
               >
                 <div className="mt-4 text-lg leading-relaxed text-gray-50 max-w-3xl mx-auto">
                   <p className="mb-4">
-                    Our development process begins with a deep understanding of our clients’ needs, followed by meticulous planning and design. We leverage modern frameworks and cloud technologies to build web and mobile applications that are both robust and adaptable. 
+                    Our development process begins with a deep understanding of our clients’ needs, followed by meticulous planning and design. We leverage modern frameworks and cloud technologies to build web and mobile applications that are both robust and adaptable.
                   </p>
                 </div>
               </div>
@@ -244,7 +232,7 @@ function About() {
             <div className="border-t border-gradient-to-r from-gray-700/50 to-transparent my-12"></div>
 
             {/* Our Mission */}
-            <section id="our-mission" className="text-center mb-16">
+            <section id="our-mission" className="text-center mb-16 scroll-mt-40">
               <h4 className="text-4xl font-bold text-yellow-400 mb-6">Our Mission</h4>
               <p className="text-xl leading-relaxed text-gray-50 max-w-3xl mx-auto italic font-semibold">
                 “To deliver innovative web and mobile application solutions that address real-world challenges, empower businesses, and exceed client expectations.”
@@ -257,11 +245,15 @@ function About() {
                 className="mt-6 mx-auto flex items-center gap-2 text-lg font-semibold text-yellow-400 hover:text-yellow-300 focus:text-yellow-300 transition-colors duration-200"
                 aria-expanded={expandedSections['our-mission-details']}
               >
+                {expandedSections['our-mission-details'] ? 'Hide Details ▲' : 'Show Details ▼'}
               </button>
               <div
                 className={`overflow-hidden transition-all duration-500 ease-in-out ${expandedSections['our-mission-details'] ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
                   }`}
               >
+                 <p className="mt-4 text-lg leading-relaxed text-gray-50 max-w-3xl mx-auto">
+                  This mission drives every decision we make, from the technologies we choose to the way we collaborate with our partners.
+                </p>
               </div>
             </section>
 

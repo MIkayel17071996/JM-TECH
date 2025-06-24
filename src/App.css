@@ -1,82 +1,113 @@
-/* Global box-sizing */
-* {
+/* Global box-sizing rule. 
+  This ensures that padding and borders are included in the element's total width and height,
+  which makes layout calculations more predictable. Including ::before and ::after applies this
+  to pseudo-elements as well for consistency.
+*/
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-/* Root document scroll settings */
+/* Root document settings.
+  - margin/padding: 0 to remove default browser spacing.
+  - width/height: 100% to make the root elements fill the viewport.
+  - overflow-x: hidden to prevent accidental horizontal scrolling, a common issue on mobile.
+  - font-family, background, and color set the base styles for the entire application.
+*/
 html,
 body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
+  overflow-x: hidden;
   font-family: "Poppins", sans-serif;
   background-color: #000;
   color: #fff;
 }
 
-/* Main app container (non-scrolling, relative) */
+/* Main application container.
+  - position: relative to serve as a positioning context for absolute children (like the aurora background).
+  - min-height: 100vh ensures it's at least as tall as the viewport.
+  - overflow: visible allows content inside to extend beyond its bounds if necessary.
+*/
 .app-container {
   position: relative;
   min-height: 100vh;
   width: 100%;
-  max-width: 100%;
-  overflow: visible; /* allow content to grow */
+  overflow: visible;
 }
 
-/* Aurora animated background */
+/* Aurora animated background container.
+  - position: absolute to place it within the .app-container.
+  - top/left/width/height make it fill the parent container completely.
+  - background defines the gradient that will be animated.
+  - background-size is set to 200% to allow the gradient to be moved during the animation.
+  - animation links to the @keyframes rule.
+  - z-index: 0 places it in the background, behind other content.
+  - pointer-events: none ensures it doesn't interfere with mouse clicks on the content above it.
+*/
 .aurora-container {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    180deg,
-    rgba(59, 130, 246, 0.2),
-    rgba(16, 185, 129, 0.2),
-    rgba(251, 191, 36, 0.1)
-  );
+  background: linear-gradient(180deg,
+      rgba(30, 64, 175, 0.08),
+      /* Darker Blue */
+      rgba(6, 95, 70, 0.08),
+      /* Darker Green */
+      rgba(146, 64, 14, 0.04)
+      /* Darker Yellow/Orange */
+    );
   background-size: 200% 200%;
-  animation: aurora 20s infinite;
+  animation: aurora 20s ease-in-out infinite;
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
 }
 
+/* Keyframe animation for the shifting gradient background. */
 @keyframes aurora {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
 }
 
-/* Content always on top of background */
+/* Container for the main page content.
+  - position: relative and z-index: 10 ensure it sits on top of the aurora background.
+  - padding-top leaves space for a fixed navigation bar.
+*/
 .content-container {
   position: relative;
   z-index: 10;
-  padding-top: 160px; /* Adjust based on Navbar height */
+  padding-top: 160px;
+  /* Adjust based on Navbar height */
   width: 100%;
-  max-width: 100%;
 }
 
-/* Example reusable page container */
+/* A reusable container for page content with a glass-like effect. */
 .page {
   margin: 2rem auto 0;
   padding: 2rem;
-  width: 100%;
   max-width: 1200px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Page titles */
+/* Basic page title styling. */
 h2 {
   font-size: 2rem;
   font-weight: 600;
@@ -84,7 +115,7 @@ h2 {
   margin-bottom: 1rem;
 }
 
-/* Counter styles */
+/* Flex container for the counter component. */
 .counter-container {
   display: flex;
   align-items: center;
@@ -92,39 +123,45 @@ h2 {
   margin-top: 1rem;
 }
 
+/* Styling for the counter's text display. */
 .counter {
   font-size: 1.5rem;
   font-weight: 500;
   color: #FBBF24;
+  /* Amber color */
 }
 
+/* Styling for the increment button. */
 .increment-button {
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
   font-weight: 500;
   color: white;
   background-color: #10B981;
+  /* Emerald color */
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .increment-button:hover {
   background-color: #059669;
+  /* Darker emerald on hover */
 }
 
-/* Distortion or canvas wrapper */
+/* A container for a canvas or other visual element. */
 .distortion-container {
   width: 100%;
   height: 400px;
   margin-top: 1rem;
   border-radius: 12px;
   border: 1px solid #3B82F6;
+  /* Blue color */
   overflow: hidden;
 }
 
-/* File input styling */
+/* Basic styling for a file input element. */
 .image-upload {
   margin: 1rem 0;
   padding: 0.5rem;
@@ -132,23 +169,30 @@ h2 {
   color: white;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid #FBBF24;
+  /* Amber color */
   border-radius: 8px;
 }
 
-/* Floating animation */
+/* Keyframe animation for a gentle floating effect. */
 @keyframes float {
   0% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-20px);
   }
+
   100% {
     transform: translateY(0);
   }
 }
 
+/* Utility class to apply the floating animation.
+  - will-change is a performance hint for the browser, telling it that the transform
+    property is expected to change, allowing for potential optimizations.
+*/
 .animate-float {
-  animation: float 3s linear infinite;
+  animation: float 3s ease-in-out infinite;
   will-change: transform;
 }

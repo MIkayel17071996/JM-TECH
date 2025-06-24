@@ -3,7 +3,6 @@ import Intro from '../components/Intro.jsx';
 import ServicesSection from '../components/ServicesSection.jsx';
 import ConsultationSection from '../components/ConsultationSection.jsx';
 import WhyChooseUsSection from '../components/WhyChooseUsSection.jsx';
-import ProductDevelopmentSection from '../components/ProductDevelopmentSection.jsx';
 import ContactProcessSection from '../components/ContactProcessSection.jsx';
 import image1 from '../assets/phone&laptopImg.png';
 
