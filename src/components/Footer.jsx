@@ -2,13 +2,12 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
-  FaTwitter,
   FaLinkedin,
-  FaGithub,
   FaEnvelope,
   FaPhone,
   FaMapMarkerAlt,
 } from 'react-icons/fa';
+import { FaXTwitter, FaFacebook } from 'react-icons/fa6'; // Changed import for new icons
 
 const Footer = () => {
   const containerVariants = {
@@ -36,10 +35,11 @@ const Footer = () => {
     },
   };
 
+  // --- UPDATED SOCIALS ARRAY ---
   const socials = [
-    { icon: <FaTwitter />, url: 'https://twitter.com', label: 'Twitter' },
+    { icon: <FaXTwitter />, url: 'https://x.com', label: 'X' },
     { icon: <FaLinkedin />, url: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: <FaGithub />, url: 'https://github.com', label: 'GitHub' },
+    { icon: <FaFacebook />, url: 'https://facebook.com', label: 'Facebook' },
   ];
 
   const groupedServices = [
@@ -49,10 +49,10 @@ const Footer = () => {
         { path: '/services/web', label: 'Web Development' },
         { path: '/services/mobile', label: 'Mobile App Development' },
         { path: '/services/ecommerce-cart', label: 'E-Commerce Solutions' },
-        { path: '/services/cross-platform', label: 'Cross-Platform Dev' },
-        { path: '/services/hybrid', label: 'Hybrid App Dev' },
-        { path: '/services/pwa', label: 'Progressive Web Apps' },
-        { path: '/services/design-system', label: 'Product Design' },
+        // { path: '/services/cross-platform', label: 'Cross-Platform Dev' },
+        // { path: '/services/hybrid', label: 'Hybrid App Dev' },
+        // { path: '/services/pwa', label: 'Progressive Web Apps' },
+        // { path: '/services/design-system', label: 'Product Design' },
       ],
     },
     {
@@ -62,8 +62,7 @@ const Footer = () => {
         { path: '/services/manual-testing', label: 'Manual Testing' },
         { path: '/services/security-testing', label: 'Security Testing' },
         { path: '/services/code-review', label: 'Code Review & Opt.' },
-        { path: '/services/security-audit', label: 'Security Audit' },
-        { path: '/services/compliance-audit', label: 'Compliance Audit' },
+
       ],
     },
   ];
@@ -159,15 +158,9 @@ const Footer = () => {
               <motion.div variants={iconVariants} whileHover="hover">
                 <FaEnvelope className="mr-2 text-green-300 text-base" />
               </motion.div>
-              <a href="mailto:info@jmtech.com" className="hover:text-green-200">
-                info@jmtech.com
+              <a href="mailto:contact@jmtech.dev" className="hover:text-green-200">
+                contact@jmtech.dev              
               </a>
-            </div>
-            <div className="text-sm flex items-center">
-              <motion.div variants={iconVariants} whileHover="hover">
-                <FaPhone className="mr-2 text-green-300 text-base" />
-              </motion.div>
-              <span className="">+374 (77) 777777</span>
             </div>
             <div className="text-sm flex items-center">
               <motion.div variants={iconVariants} whileHover="hover">
@@ -176,7 +169,7 @@ const Footer = () => {
               <span>Yerevan, Armenia</span>
             </div>
             <Link
-              to="/contact-us"
+              to="/contact"
               className="inline-block mt-4 px-5 py-2.5 text-sm font-medium bg-green-300/70 text-black rounded-md shadow-sm hover:bg-green-200 hover:shadow-md transition duration-200"
             >
               Get in Touch

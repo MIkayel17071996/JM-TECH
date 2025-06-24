@@ -1,0 +1,21 @@
+{
+  "name": "JM TECH",
+  "short_name": "JMTECH",
+  "description": "Crafting innovative web and mobile solutions with cutting-edge technology.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0F7F5C",
+  "icons": [
+    {
+      "src": "/logo1-P.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "//logo1-P.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

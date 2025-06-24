@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDownIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
+import { ChevronDownIcon } from '@heroicons/react/24/solid';
 
 function PrivacyPolicy() {
   const [activeSection, setActiveSection] = useState('summary');
   const [expandedDetails, setExpandedDetails] = useState({});
-  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const navbarRef = useRef(null);
@@ -22,7 +21,6 @@ function PrivacyPolicy() {
     if (targetElement) {
       targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
       setTimeout(() => setActiveSection(sectionId), 300);
-      setIsMobileNavOpen(false);
     } else {
       setErrorMessage(`Section "${sectionId}" not found. Please try another link.`);
       setTimeout(() => setErrorMessage(''), 3000);
@@ -70,35 +68,6 @@ function PrivacyPolicy() {
 
   return (
     <div className="page py-16 px-4 font-sans antialiased bg-gradient-to-br from-gray-900 to-black text-white min-h-screen flex flex-col items-center relative overflow-hidden pt-40">
-      {/* Mobile Navigation */}
-      <div className="lg:hidden fixed top-40 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-md">
-        <button
-          ref={navbarRef}
-          className="p-4 text-[#FBBF24]"
-          onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
-          aria-label="Toggle section navigation"
-        >
-          {isMobileNavOpen ? <XMarkIcon className="h-8 w-8" /> : <Bars3Icon className="h-8 w-8" />}
-        </button>
-        {isMobileNavOpen && (
-          <ul className="space-y-2 p-4 bg-gray-900/95 rounded-lg shadow-lg">
-            {navItems.map((item) => (
-              <li key={item.id}>
-                <a
-                  href={`#${item.id}`}
-                  onClick={(e) => handleNavLinkClick(e, item.id)}
-                  className={`block px-4 py-3 text-lg font-medium text-[#FBBF24] hover:bg-[#FBBF24]/20 hover:text-white transition-colors duration-300 rounded-md ${
-                    activeSection === item.id ? 'bg-[#FBBF24] text-black font-bold' : ''
-                  }`}
-                >
-                  {item.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-
       {/* Error Toast */}
       {errorMessage && (
         <div className="fixed top-48 right-4 bg-red-500 text-white p-4 rounded-lg shadow-lg z-50">
@@ -209,7 +178,7 @@ function PrivacyPolicy() {
                   </p>
                   <ul className="list-disc list-inside ml-4 mb-6 text-white">
                     <li>
-                      <strong>Contact Details:</strong> Name, email address, phone number, and message content submitted via contact forms, emails (e.g., to <a href="mailto:contact@jmtech.com" className="text-[#FBBF24] hover:text-white">contact@jmtech.com</a>), or live chat.
+                      <strong>Contact Details:</strong> Name, email address, phone number, and message content submitted via contact forms, emails (e.g., to <a href="mailto:contact@jmtech.dev" className="text-[#FBBF24] hover:text-white">contact@jmtech.dev</a>), or live chat.
                     </li>
                     <li>
                       <strong>Subscriptions:</strong> Email address provided for newsletters or updates.
@@ -448,8 +417,8 @@ function PrivacyPolicy() {
                   <ul className="list-disc list-inside ml-4 mb-4 text-white">
                     <li>
                       <strong>Email:</strong>{' '}
-                      <a href="mailto:privacy@jmtech.com" className="text-[#FBBF24] hover:text-white transition-colors duration-300 underline underline-offset-2">
-                        privacy@jmtech.com
+                      <a href="mailto:contact@jmtech.com" className="text-[#FBBF24] hover:text-white transition-colors duration-300 underline underline-offset-2">
+                        contact@jmtech.com
                       </a>
                     </li>
                     <li>
@@ -473,7 +442,7 @@ function PrivacyPolicy() {
           className="fixed bottom-4 right-4 bg-[#FBBF24] text-black p-3 rounded-full shadow-lg hover:bg-white transition-colors duration-300"
           aria-label="Back to top"
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
           </svg>
         </button>
