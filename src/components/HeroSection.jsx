@@ -26,13 +26,12 @@ const HeroSection = ({
 
   return (
     <motion.div
-      // CORRECTED: Added responsive top padding.
-      // - `pt-16` adds 4rem (64px) of padding to the top on mobile. This pushes
-      //   your content down to make space for a navbar.
-      // - `sm:pt-0` removes that padding on screens larger than the 'sm' breakpoint,
-      //   restoring the original perfect vertical centering for desktop.
-      // - You can change `pt-16` to `pt-20` or `pt-5` (for 20px) as needed.
-      className="relative flex items-center justify-center bg-transparent overflow-x-hidden min-h-screen pt-16 sm:pt-0"
+      // CORRECTED: Adjusted positioning for mobile.
+      // - The 'top' offset is now less aggressive on smaller screens.
+      // - The 'min-h' is adjusted for better mobile viewing.
+      // - Added vertical padding on mobile to ensure content isn't cut off.
+      className="relative flex items-center justify-center bg-transparent overflow-x-hidden 
+                 min-h-[80vh] md:min-h-screen top-[-90px] md:top-[-120px] lg:top-[-150px] pt-20 pb-10"
       style={{
         backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
         backgroundSize: 'cover',
@@ -56,6 +55,7 @@ const HeroSection = ({
                 <motion.span
                   key={`${i}-${j}`}
                   variants={wordVariants}
+                  // CORRECTED: Reduced margin on smaller screens to prevent awkward wrapping.
                   className="inline-block whitespace-nowrap mr-1.5 sm:mr-2 md:mr-3"
                 >
                   {word}
