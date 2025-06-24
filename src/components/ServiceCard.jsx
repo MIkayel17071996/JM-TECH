@@ -1,4 +1,3 @@
-// src/components/ServiceCard.jsx
 import React, { memo } from 'react';
 
 /**
@@ -36,7 +35,7 @@ const ServiceCard = ({
 
   return (
     <div
-      className={`group relative bg-transparent border border-yellow-500/20 p-8 rounded-xl shadow-md hover:shadow-xl hover:border-yellow-500 transition-all duration-300 transform hover:-translate-y-2 flex flex-col min-h-[300px] ${
+      className={`group relative bg-transparent border border-yellow-500/20 p-3 sm:p-4 rounded-xl shadow-md hover:shadow-xl hover:border-yellow-500 transition-all duration-300 flex flex-col max-w-xs sm:max-w-sm ${
         isActive ? 'border-yellow-500 ring-2 ring-yellow-300' : ''
       }`}
       role="button"
@@ -50,12 +49,17 @@ const ServiceCard = ({
         aria-hidden="true"
       ></div>
       <h3
-        className="text-3xl font-semibold text-white mb-4 group-hover:text-yellow-400 transition-colors duration-300 flex items-center"
-        aria-hidden="true"
+        className="text-lg sm:text-xl font-semibold text-white mb-2 group-hover:text-yellow-400 transition-colors duration-300 flex items-center"
+        style={{ wordBreak: 'break-word' }}
       >
-        <span className="text-4xl mr-3">{icon}</span> {title}
+        <span className="text-xl sm:text-2xl mr-1">{icon}</span> {title}
       </h3>
-      <p className="text-gray-300 text-lg leading-relaxed flex-grow">{description}</p>
+      <p
+        className="text-gray-300 text-sm sm:text-base leading-relaxed flex-grow"
+        style={{ wordWrap: 'break-word', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 5, WebkitBoxOrient: 'vertical' }}
+      >
+        {description}
+      </p>
     </div>
   );
 };
